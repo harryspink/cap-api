@@ -1,0 +1,23 @@
+{
+    "name": "mike-k-burke/cap-api",
+    "description": "API for retriving used car valuation data from the Experian Autocheck system",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mike Burke",
+            "email": "mkburke@hotmail.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MikeKBurke\\CapApi\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "bespoke-support/reg": "^0.1.0",
+        "nesbot/carbon": "^1.23@dev"
+    }
+}
