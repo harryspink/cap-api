@@ -18,6 +18,6 @@
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "bespoke-support/reg": "^0.1.0",
-        "nesbot/carbon": "^1.23"
+        "nesbot/carbon": "^1.22"
     }
 }
