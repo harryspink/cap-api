@@ -35,7 +35,7 @@ class CapApiInterface
     {
         $client = new Client();
 
-        $response = $client->post(
+        $response = $client->get(
             self::$base_url . $request_url,
             [
                 'query'  => array_merge(

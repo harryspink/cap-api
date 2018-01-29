@@ -37,7 +37,7 @@ class DvlaMotApiInterface
             'x-api-key' => $key
         ]]);
 
-        $response = $client->post(
+        $response = $client->get(
             self::$url,
             [
                 'query' => $call_data,
