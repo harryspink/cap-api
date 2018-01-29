@@ -50,6 +50,7 @@ class CapApi
 
         $this->credentials['SubscriberID'] = $subscriber_id;
         $this->credentials['Password'] = $password;
+        $this->dvla_key = $dvla_key;
     }
 
     /**
@@ -71,7 +72,7 @@ class CapApi
         $mileage = null;
         if (isset($dvla_key)) {
             $dvla_data = DvlaMotApiInterface::callApi(
-                $this->key,
+                $this->dvla_key,
                 ['registration' => $vrm]
             );
             if (!$dvla_data instanceof CapApiError &&
