@@ -1,6 +1,6 @@
 {
     "name": "mike-k-burke-test/cap-api",
-    "description": "API for retriving used car valuation data from the Experian Autocheck system",
+    "description": "API for retrieving used car valuation data from the CAP-HPI API system",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "MikeKBurke\\CapApi\\": "src/"
+            "MikeKBurkeTest\\CapApi\\": "src/"
         }
     },
     "minimum-stability": "dev",

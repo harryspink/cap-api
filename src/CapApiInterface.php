@@ -46,8 +46,8 @@ class CapApiInterface
             ]
         );
 
-        if ($response->status_code != 200) {
-            return new CapApiError($response->message, $response->status_code);
+        if ($response->getStatusCode() != 200) {
+            return new CapApiError(isset($response->message) ? $response->message : 'Error', $response->getStatusCode());
         }
 
         $data = simplexml_load_string($response->getBody());
