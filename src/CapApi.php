@@ -70,19 +70,19 @@ class CapApi
 
         // get the mileage for the vehicle, if available, from the DVLA
         $mileage = null;
-        if (isset($dvla_key)) {
+        if (isset($this->dvla_key)) {
             $dvla_data = DvlaMotApiInterface::callApi(
                 $this->dvla_key,
                 ['registration' => $vrm]
             );
             if (!$dvla_data instanceof CapApiError &&
                 isset($dvla_data[0]) &&
-                isset($dvla_data[0]['motTests']) &&
-                isset($dvla_data[0]['motTests'][0]) &&
-                isset($dvla_data[0]['motTests']['odometerValue']) &&
-                is_numeric($dvla_data[0]['motTests']['odometerValue'])
+                isset($dvla_data[0]->motTests) &&
+                isset($dvla_data[0]->motTests[0]) &&
+                isset($dvla_data[0]->motTests[0]->odometerValue) &&
+                is_numeric($dvla_data[0]->motTests[0]->odometerValue)
             ) {
-                $mileage = $dvla_data[0]['motTests'][0]['odometerValue'];
+                $mileage = $dvla_data[0]->motTests[0]->odometerValue;
             }
         }
 
