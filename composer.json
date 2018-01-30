@@ -1,5 +1,5 @@
 {
-    "name": "mike-k-burke/cap-api",
+    "name": "mike-k-burke-test/cap-api",
     "description": "API for retriving used car valuation data from the Experian Autocheck system",
     "type": "library",
     "license": "MIT",
