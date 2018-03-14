@@ -105,7 +105,10 @@ class CapApi
 
         $other_data = CapApiInterface::callApi(
             '/UsedValues/CapUsedValues.asmx/GetUsedValuation',
-            $this->credentials,
+            [
+                'Subscriber_ID' => $this->credentials['SubscriberID'],
+                'Password' => $this->credentials['Password'],
+            ],
             [
                 'Database' => 'Car',
                 'CAPID' => (string) $data->VRMLookup->CAPID,
