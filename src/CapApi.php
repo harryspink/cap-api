@@ -58,7 +58,7 @@ class CapApi
      *
      * @param string  $vrm      VRM to lookup
      * @param string  $reg_date Date the vehicle was first registered
-     * @return string|CapApiError|null
+     * @return array|CapApiError|null
      */
     public function valuation($vrm, $reg_date)
     {
@@ -103,7 +103,24 @@ class CapApi
             ]
         );
 
-        return $data;
+        $other_data = CapApiInterface::callApi(
+            '/UsedValues/CapUsedValues.asmx/GetUsedValuation',
+            $this->credentials,
+            [
+                'Database' => 'Car',
+                'CAPID' => (string) $data->VRMLookup->CAPID,
+                'CAPCode' => '',
+                'RegistrationDate' => Carbon::create((string) $data->VRMLookup->RegisteredDate)->format('Y-m-d'),
+                'DatasetDate' => Carbon::now()->format('Y-m-d'),
+                'JustCurrent' => true,
+                'Mileage' => $mileage
+            ]
+        );
+
+        return [
+            'VRMInternetPricesValuation' => $data,
+            'GetUsedValuation' => $other_data
+        ];
     }
 
     /**

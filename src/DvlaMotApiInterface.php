@@ -33,7 +33,7 @@ class DvlaMotApiInterface
     public static function callApi($key, array $call_data)
     {
         $client = new Client(['headers' => [
-            'Accept'    => 'application/json',
+            'Accept'    => 'application/json+v3',
             'x-api-key' => $key
         ]]);
 
