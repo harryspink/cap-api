@@ -112,6 +112,7 @@ class CapApi
             [
                 'Database' => 'Car',
                 'CAPID' => '25695',
+                'CapCode' => '',
                 'RegistrationDate' => Carbon::parse($reg_date)->format('Y-m-d'),
                 'DatasetDate' => Carbon::now()->format('Y-m-d'),
                 'JustCurrent' => 'true',
