@@ -115,7 +115,7 @@ class CapApi
                 'CAPCode' => '',
                 'RegistrationDate' => Carbon::parse($reg_date)->format('Y-m-d'),
                 'DatasetDate' => Carbon::now()->format('Y-m-d'),
-                'JustCurrent' => true,
+                'JustCurrent' => 'true',
                 'Mileage' => $mileage
             ]
         );
