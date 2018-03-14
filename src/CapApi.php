@@ -110,7 +110,7 @@ class CapApi
                 'Database' => 'Car',
                 'CAPID' => (string) $data->VRMLookup->CAPID,
                 'CAPCode' => '',
-                'RegistrationDate' => Carbon::create((string) $data->VRMLookup->RegisteredDate)->format('Y-m-d'),
+                'RegistrationDate' => Carbon::parse($reg_date)->format('Y-m-d'),
                 'DatasetDate' => Carbon::now()->format('Y-m-d'),
                 'JustCurrent' => true,
                 'Mileage' => $mileage
