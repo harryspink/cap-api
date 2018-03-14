@@ -93,17 +93,17 @@ class CapApi
             $mileage = 15000 * $years;
         }
 
-        $data = CapApiInterface::callApi(
-            '/Vrm/CapVrm.asmx/VRMInternetPricesValuation',
-            $this->credentials,
-            [
-                'VRM' => $vrm,
-                'Mileage' => $mileage,
-                'StandardEquipmentRequired' => 'false'
-            ]
-        );
+//        $data = CapApiInterface::callApi(
+//            '/Vrm/CapVrm.asmx/VRMInternetPricesValuation',
+//            $this->credentials,
+//            [
+//                'VRM' => $vrm,
+//                'Mileage' => $mileage,
+//                'StandardEquipmentRequired' => 'false'
+//            ]
+//        );
 
-        $other_data = CapApiInterface::callApi(
+        $data = CapApiInterface::callApi(
             '/UsedValues/CapUsedValues.asmx/GetUsedValuation',
             [
                 'Subscriber_ID' => $this->credentials['SubscriberID'],
@@ -111,8 +111,7 @@ class CapApi
             ],
             [
                 'Database' => 'Car',
-                'CAPID' => (string) $data->VRMLookup->CAPID,
-                'CAPCode' => '',
+                'CAPID' => '25695',
                 'RegistrationDate' => Carbon::parse($reg_date)->format('Y-m-d'),
                 'DatasetDate' => Carbon::now()->format('Y-m-d'),
                 'JustCurrent' => 'true',
@@ -120,10 +119,7 @@ class CapApi
             ]
         );
 
-        return [
-            'VRMInternetPricesValuation' => $data,
-            'GetUsedValuation' => $other_data
-        ];
+        return $data;
     }
 
     /**
