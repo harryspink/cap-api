@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "MikeKBurkeTest\\CapApi\\": "src/"
+            "MikeKBurke\\CapApi\\": "src/"
         }
     },
     "minimum-stability": "dev",
