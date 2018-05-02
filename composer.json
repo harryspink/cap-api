@@ -1,5 +1,5 @@
 {
-    "name": "mike-k-burke-test/cap-api",
+    "name": "mike-k-burke/cap-api",
     "description": "API for retrieving used car valuation data from the CAP-HPI API system",
     "type": "library",
     "license": "MIT",
