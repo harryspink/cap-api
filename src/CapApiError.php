@@ -1,6 +1,6 @@
 <?
 
-namespace MikeKBurkeTest\CapApi;
+namespace MikeKBurke\CapApi;
 
 /**
  * Class CapApiError.

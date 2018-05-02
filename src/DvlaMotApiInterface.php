@@ -1,6 +1,6 @@
 <?php
 
-namespace MikeKBurkeTest\CapApi;
+namespace MikeKBurke\CapApi;
 
 use GuzzleHttp\Client;
 
