@@ -3,7 +3,7 @@
 namespace MikeKBurke\CapApi;
 
 /**
- * Class CapApiError.
+ * Class CapApiError
  *
  * @category API
  *
