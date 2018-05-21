@@ -39,10 +39,10 @@ class CapApi
      *
      * @param string $subscriber_id  CAP API subscriber ID
      * @param string $password  CAP API password
-     * @param string $dvla_key  Optional DVLA MOT API authentication key
+     * @param string $dvla_key  DVLA MOT API authentication key
      * @throws \InvalidArgumentException|\ErrorException
      */
-    public function __construct($subscriber_id, $password, $dvla_key = null)
+    public function __construct($subscriber_id, $password, $dvla_key)
     {
         if (empty($subscriber_id) || empty($password)) {
             throw new \InvalidArgumentException(CapApiError::ERROR_AUTH_PARAMS);
@@ -57,10 +57,10 @@ class CapApi
      * Valuation
      *
      * @param string  $vrm      VRM to lookup
-     * @param string  $reg_date Date the vehicle was first registered
+     * @param string  $reg_date Optional date the vehicle was first registered
      * @return array|CapApiError|null
      */
-    public function valuation($vrm, $reg_date)
+    public function valuation($vrm, $reg_date = null)
     {
         $vrm = preg_replace('/[^A-Z0-9]/', '', strtoupper($vrm));
 
@@ -71,26 +71,23 @@ class CapApi
         // get the mileage for the vehicle, if available, from the DVLA
         $mileage = null;
         if (isset($this->dvla_key)) {
-            $dvla_data = DvlaMotApiInterface::callApi(
-                $this->dvla_key,
-                ['registration' => $vrm]
-            );
-            if (!$dvla_data instanceof CapApiError &&
-                isset($dvla_data[0]) &&
-                isset($dvla_data[0]->motTests) &&
-                isset($dvla_data[0]->motTests[0]) &&
-                isset($dvla_data[0]->motTests[0]->odometerValue) &&
-                is_numeric($dvla_data[0]->motTests[0]->odometerValue)
-            ) {
-                $mileage = $dvla_data[0]->motTests[0]->odometerValue;
+            $dvla_lookup = new DvlaMotApiInterface($this->dvla_key, $vrm);
+            $last_mileage = $dvla_lookup->getLastRecordedMileage();
+            if (isset($last_mileage)) {
+                $mileage = $last_mileage->mileage;
             }
         }
 
         // if unable to get the mileage, calculate a rough value
         if (!isset($mileage)) {
-            $reg_date = Carbon::parse($reg_date);
-            $years = $reg_date->diffinYears(Carbon::today());
-            $mileage = 15000 * $years;
+            if (isset($reg_date)) {
+                $reg_date = Carbon::parse($reg_date);
+                $years = $reg_date->diffInYears(Carbon::today());
+                $mileage = 15000 * $years;
+            } else {
+                // all else fails default mileage to 1
+                $mileage = 1;
+            }
         }
 
         $data = CapApiInterface::callApi(
