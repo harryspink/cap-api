@@ -1,5 +1,5 @@
 {
-    "name": "mike-k-burke/cap-api",
+    "name": "harryspink/cap-api",
     "description": "API for retrieving used car valuation data from the CAP-HPI API system",
     "type": "library",
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Mike Burke",
             "email": "mkburke@hotmail.co.uk"
+        },
+        {
+            "name": "Harry Spink",
+            "email": "me@harrysp.ink"
         }
     ],
     "autoload": {

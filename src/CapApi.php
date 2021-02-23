@@ -60,34 +60,12 @@ class CapApi
      * @param string  $reg_date Optional date the vehicle was first registered
      * @return array|CapApiError|null
      */
-    public function valuation($vrm, $reg_date = null)
+    public function valuation($vrm, $mileage = 15000)
     {
         $vrm = preg_replace('/[^A-Z0-9]/', '', strtoupper($vrm));
 
         if (!strlen($vrm) || !self::isVRM($vrm)) {
             throw new \InvalidArgumentException(CapApiError::ERROR_VRM);
-        }
-
-        // get the mileage for the vehicle, if available, from the DVLA
-        $mileage = null;
-        if (isset($this->dvla_key)) {
-            $dvla_lookup = new DvlaMotApiInterface($this->dvla_key, $vrm);
-            $last_mileage = $dvla_lookup->getLastRecordedMileage();
-            if (isset($last_mileage)) {
-                $mileage = $last_mileage->mileage;
-            }
-        }
-
-        // if unable to get the mileage, calculate a rough value
-        if (!isset($mileage)) {
-            if (isset($reg_date)) {
-                $reg_date = Carbon::parse($reg_date);
-                $years = $reg_date->diffInYears(Carbon::today());
-                $mileage = 15000 * $years;
-            } else {
-                // all else fails default mileage to 1
-                $mileage = 1;
-            }
         }
 
         $data = CapApiInterface::callApi(
